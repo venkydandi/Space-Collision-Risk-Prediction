@@ -2,3 +2,4 @@
 * text=auto eol=lf
 *.joblib binary
 *.csv text eol=lf
+
