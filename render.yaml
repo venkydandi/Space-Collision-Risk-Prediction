@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: satellite-conjunction-risk-dashboard
+    runtime: docker
+    plan: free
+    region: oregon
+    branch: main
+    healthCheckPath: /_stcore/health
+    envVars:
+      - key: PORT
+        value: 10000

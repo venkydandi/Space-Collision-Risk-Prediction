@@ -1,0 +1,35 @@
+{
+  "features": [
+    "time_to_tca",
+    "max_risk_estimate",
+    "max_risk_scaling",
+    "miss_distance",
+    "mahalanobis_distance",
+    "c_obs_used",
+    "c_object_type"
+  ],
+  "thresholds": {
+    "RF_unweighted": 0.1,
+    "RF_SMOTENC_0.25": 0.2
+  },
+  "label_mapping": {
+    "0": "Low risk",
+    "1": "High risk"
+  },
+  "models": {
+    "RF_unweighted": "rf_unweighted.joblib",
+    "RF_SMOTENC_0.25": "rf_smotenc_025.joblib"
+  },
+  "prediction_window_days": [
+    2.0,
+    2.9
+  ],
+  "thresholds_are_provisional": true,
+  "versions": {
+    "scikit_learn": "1.6.1",
+    "imbalanced_learn": "0.14.2",
+    "joblib": "1.6.0",
+    "pandas": "2.3.3",
+    "numpy": "2.1.3"
+  }
+}

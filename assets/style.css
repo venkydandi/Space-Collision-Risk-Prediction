@@ -1,0 +1,221 @@
+/* Corporate Enterprise Theme for Satellite Conjunction Risk Dashboard */
+
+:root {
+  --color-primary: #1D4ED8;
+  --color-primary-light: #EFF6FF;
+  --color-primary-dark: #1E40AF;
+  
+  --color-bg-app: #F8FAFC;
+  --color-bg-card: #FFFFFF;
+  --color-bg-sidebar: #0F172A;
+  
+  --color-border: #E2E8F0;
+  --color-border-subtle: #F1F5F9;
+  
+  --color-text-main: #0F172A;
+  --color-text-muted: #64748B;
+  --color-text-subtle: #94A3B8;
+  
+  /* Status Colors */
+  --color-high-risk-text: #DC2626;
+  --color-high-risk-bg: #FEF2F2;
+  --color-high-risk-border: #FECACA;
+  
+  --color-low-risk-text: #16A34A;
+  --color-low-risk-bg: #F0FDF4;
+  --color-low-risk-border: #BBF7D0;
+  
+  --color-reject-text: #D97706;
+  --color-reject-bg: #FFFBEB;
+  --color-reject-border: #FDE68A;
+  
+  --color-disagree-text: #7C3AED;
+  --color-disagree-bg: #FAF5FF;
+  --color-disagree-border: #E9D5FF;
+}
+
+/* App Canvas & Layout */
+.block-container {
+  padding-top: 1.5rem !important;
+  padding-bottom: 3rem !important;
+  max-width: 1400px !important;
+}
+
+/* Header Banner */
+.corp-header {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.corp-header-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.corp-header-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 0 0 0.4rem 0;
+  line-height: 1.2;
+}
+
+.corp-header-subtitle {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Enterprise KPI Cards */
+.kpi-card {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 1.2rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  height: 100%;
+}
+
+.kpi-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  margin-bottom: 0.4rem;
+}
+
+.kpi-value {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1.1;
+  margin-bottom: 0.3rem;
+}
+
+.kpi-detail {
+  font-size: 0.8rem;
+  color: var(--color-text-subtle);
+}
+
+/* Status Badges */
+.badge-high {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-high-risk-text);
+  background-color: var(--color-high-risk-bg);
+  border: 1px solid var(--color-high-risk-border);
+  border-radius: 4px;
+}
+
+.badge-low {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-low-risk-text);
+  background-color: var(--color-low-risk-bg);
+  border: 1px solid var(--color-low-risk-border);
+  border-radius: 4px;
+}
+
+.badge-reject {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-reject-text);
+  background-color: var(--color-reject-bg);
+  border: 1px solid var(--color-reject-border);
+  border-radius: 4px;
+}
+
+.badge-disagree {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-disagree-text);
+  background-color: var(--color-disagree-bg);
+  border: 1px solid var(--color-disagree-border);
+  border-radius: 4px;
+}
+
+/* Callout / Notice Box */
+.notice-box {
+  background-color: #F8FAFC;
+  border-left: 4px solid var(--color-primary);
+  border-top: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0.9rem 1.1rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: var(--color-text-main);
+}
+
+.notice-warning {
+  background-color: var(--color-reject-bg);
+  border-left: 4px solid var(--color-reject-text);
+  border-top: 1px solid var(--color-reject-border);
+  border-right: 1px solid var(--color-reject-border);
+  border-bottom: 1px solid var(--color-reject-border);
+  border-radius: 4px;
+  padding: 0.9rem 1.1rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: #78350F;
+}
+
+/* Button & Form refinements */
+.stButton > button {
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+}
+
+/* Sidebar styling */
+[data-testid="stSidebar"] {
+  background-color: #0F172A !important;
+}
+
+[data-testid="stSidebar"] * {
+  color: #F8FAFC !important;
+}
+
+[data-testid="stSidebar"] .stSelectbox label,
+[data-testid="stSidebar"] .stSlider label,
+[data-testid="stSidebar"] .stRadio label {
+  color: #E2E8F0 !important;
+  font-weight: 600;
+}
+
+[data-testid="stSidebar"] hr {
+  border-color: #334155 !important;
+}
+
+[data-testid="stSidebar"] .stSlider [data-baseweb="slider"] div {
+  color: #0F172A !important;
+}
+
+/* Dataframe Styling */
+[data-testid="stDataFrame"] {
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  overflow: hidden;
+}

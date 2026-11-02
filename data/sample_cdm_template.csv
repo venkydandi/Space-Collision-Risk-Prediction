@@ -1,0 +1,2 @@
+event_id,time_to_tca,max_risk_estimate,max_risk_scaling,miss_distance,mahalanobis_distance,c_obs_used,c_object_type
+CONJ-2026-001,2.45,-4.2,12.5,480.0,8.5,42.0,DEBRIS
