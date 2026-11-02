@@ -2,14 +2,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Dict, List, Mapping, Optional, Tuple
+from typing import Any, Mapping, Optional
 import numpy as np
 import pandas as pd
 
 from config.settings import (
     DEFAULT_THRESHOLDS,
-    LABEL_HIGH_RISK,
-    LABEL_LOW_RISK,
     MODEL_LABELS,
     MODEL_SMOTENC_KEY,
     MODEL_UNWEIGHTED_KEY,

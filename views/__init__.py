@@ -16,3 +16,4 @@ __all__ = [
     "render_reports_view",
     "render_about_view",
 ]
+

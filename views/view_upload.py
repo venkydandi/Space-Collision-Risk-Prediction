@@ -8,7 +8,6 @@ import streamlit as st
 
 from components.data_tables import render_interactive_results_table
 from components.ui_layout import render_header, render_kpi_card
-from config.settings import FEATURES, OUTPUT_COLS
 from services.export_service import generate_cdm_template_csv
 
 
@@ -87,14 +86,17 @@ def render_upload_view(run_screening_fn, current_screening_result):
                 raw_df = pd.read_csv(demo_path)
                 st.session_state["raw_dataset"] = raw_df
                 st.session_state["dataset_name"] = "sample_cdm_mixed.csv"
-                st.success(f"Loaded demo dataset with {len(raw_df)} records.")
+                st.session_state.pop("current_screening_result", None)
+                st.rerun()
 
     if uploaded_file is not None:
         try:
             raw_df = parse_file(uploaded_file)
-            st.session_state["raw_dataset"] = raw_df
-            st.session_state["dataset_name"] = uploaded_file.name
-            st.success(f"Successfully loaded '{uploaded_file.name}' ({len(raw_df):,} rows, {len(raw_df.columns)} columns).")
+            if st.session_state.get("dataset_name") != uploaded_file.name:
+                st.session_state["raw_dataset"] = raw_df
+                st.session_state["dataset_name"] = uploaded_file.name
+                st.session_state.pop("current_screening_result", None)
+                st.rerun()
         except Exception as e:
             st.error(f"File ingestion error: {e}")
             return
@@ -125,3 +127,4 @@ def render_upload_view(run_screening_fn, current_screening_result):
             render_kpi_card("High Risk Identified", f"{summary.high_risk_count:,}", f"Under threshold {summary.primary_threshold:.2f}", c4)
 
             render_interactive_results_table(current_screening_result.full_table, key_prefix="upload_results")
+

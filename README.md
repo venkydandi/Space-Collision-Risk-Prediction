@@ -340,3 +340,4 @@ python -m unittest discover -s tests -v
 
 > [!WARNING]
 > This application is an experimental machine learning screening and decision-support prototype. Model scores represent statistical ranking scores, not calibrated physical probabilities of collision ($P_c$). A low-risk output does not guarantee orbital safety, and a high-risk output does not confirm a collision. Conjunction assessment, covariance analysis, and collision avoidance maneuvers (CAM) must always be validated by qualified space flight dynamics personnel using high-fidelity numerical propagators and official astrodynamics software.
+

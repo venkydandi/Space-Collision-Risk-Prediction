@@ -9,7 +9,7 @@ from components.charts import (
     plot_risk_distribution_donut,
     plot_score_histogram,
 )
-from components.ui_layout import render_header, render_kpi_card
+from components.ui_layout import render_header
 from config.settings import OUTPUT_COLS
 
 
@@ -54,3 +54,4 @@ def render_analysis_view(screening_result):
     # Row 3: Chaser Object Class Breakdown
     st.markdown("### Chaser Object Type Vulnerability Analysis")
     st.plotly_chart(plot_object_type_distribution(accepted_df), use_container_width=True)
+

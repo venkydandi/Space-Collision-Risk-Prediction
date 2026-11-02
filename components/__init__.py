@@ -28,3 +28,4 @@ __all__ = [
     "plot_model_comparison_bar",
     "plot_object_type_distribution",
 ]
+

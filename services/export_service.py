@@ -2,10 +2,9 @@
 from __future__ import annotations
 
 import io
-from typing import Optional
 import pandas as pd
 
-from config.settings import FEATURES, OUTPUT_COLS
+from config.settings import FEATURES
 
 
 def generate_results_csv(results_df: pd.DataFrame) -> bytes:
@@ -66,3 +65,4 @@ decision scores, not physical collision probabilities. Expert orbital assessment
 is mandatory for all events.
 ================================================================================
 """
+

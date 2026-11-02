@@ -4,7 +4,6 @@ from __future__ import annotations
 import streamlit as st
 
 from components.ui_layout import render_header, render_kpi_card
-from config.settings import OUTPUT_COLS
 from services.export_service import (
     generate_executive_summary_text,
     generate_results_csv,
@@ -84,3 +83,4 @@ def render_reports_view(screening_result):
     st.markdown("### Complete Audit Table Preview")
     st.caption("Verifying 100% row order preservation and error transparency.")
     st.dataframe(full_table, use_container_width=True, hide_index=True)
+

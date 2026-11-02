@@ -4,7 +4,6 @@ from __future__ import annotations
 import streamlit as st
 
 from components.charts import plot_model_comparison_bar
-from components.data_tables import render_interactive_results_table
 from components.ui_layout import render_header, render_kpi_card
 from config.settings import OUTPUT_COLS
 
@@ -104,3 +103,4 @@ def render_comparison_view(screening_result):
             cols_to_show.append(feat)
 
     st.dataframe(comparison_df[cols_to_show], use_container_width=True, hide_index=True)
+

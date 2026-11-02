@@ -34,12 +34,12 @@ class ValidationEngineTests(unittest.TestCase):
         self.assertEqual(result.rejection_reasons[0], "")
 
     def test_tca_boundary_exact_values(self):
-        # 2.0 and 2.9 should be accepted (inclusive)
-        r_min = dict(self.valid_record, time_to_tca=2.0)
-        r_max = dict(self.valid_record, time_to_tca=2.9)
-        # 1.99 and 2.91 should be rejected
-        r_below = dict(self.valid_record, time_to_tca=1.99)
-        r_above = dict(self.valid_record, time_to_tca=2.91)
+        # Boundaries (inclusive) should be accepted
+        r_min = dict(self.valid_record, time_to_tca=TCA_MIN_DAYS)
+        r_max = dict(self.valid_record, time_to_tca=TCA_MAX_DAYS)
+        # Outside boundaries should be rejected
+        r_below = dict(self.valid_record, time_to_tca=TCA_MIN_DAYS - 0.01)
+        r_above = dict(self.valid_record, time_to_tca=TCA_MAX_DAYS + 0.01)
 
         df = pd.DataFrame([r_min, r_max, r_below, r_above])
         result = validate_cdm_dataset(df)
@@ -103,3 +103,4 @@ class ValidationEngineTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

@@ -120,3 +120,4 @@ def get_cached_model_bundle(model_dir: Path | str | None = None) -> Tuple[Dict[s
     except Exception:
         # Fallback to direct load when not running in Streamlit runtime
         return load_model_bundle(model_dir)
+

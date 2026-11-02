@@ -1,17 +1,15 @@
 """Inference and model prediction engine."""
 from __future__ import annotations
 
-from typing import Any, Dict, List, Mapping, Optional, Tuple
+from typing import Any, Dict, List, Mapping, Tuple
 import numpy as np
 import pandas as pd
 
 from config.settings import (
     DEFAULT_THRESHOLDS,
     FEATURES,
-    LABEL_HIGH_RISK,
     LABEL_LOW_RISK,
     LABEL_MAPPING,
-    MODEL_LABELS,
     MODEL_SMOTENC_KEY,
     MODEL_UNWEIGHTED_KEY,
 )
@@ -100,3 +98,4 @@ def evaluate_dual_models(
     results["is_disagreement"] = is_disagreement
 
     return results
+

@@ -1,14 +1,11 @@
 """About and Methodology View."""
 from __future__ import annotations
 
-from pathlib import Path
 import streamlit as st
 
 from components.ui_layout import render_header
 from config.settings import (
     DEFAULT_THRESHOLDS,
-    FEATURES,
-    MODEL_LABELS,
     MODEL_SMOTENC_KEY,
     MODEL_UNWEIGHTED_KEY,
     MODELS_DIR,
@@ -101,3 +98,4 @@ def render_about_view():
         - **TCA Validation Gating:** Encounters with TCA outside the 2.0–2.9 day window are rejected by design because the model was calibrated specifically for early-horizon operations.
         """
     )
+

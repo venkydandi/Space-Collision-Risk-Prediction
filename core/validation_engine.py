@@ -2,14 +2,13 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, List, Optional
+from typing import Any, List
 import numpy as np
 import pandas as pd
 
 from config.settings import (
     FEATURES,
     NUMERIC_FEATURES,
-    OBJECT_TYPE_CATEGORIES,
     TCA_MAX_DAYS,
     TCA_MIN_DAYS,
 )
@@ -153,3 +152,4 @@ def validate_cdm_dataset(data: pd.DataFrame) -> ValidationResult:
         source_rows=source_rows,
         display_event_ids=display_event_ids,
     )
+

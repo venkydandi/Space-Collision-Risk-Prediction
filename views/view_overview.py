@@ -76,3 +76,4 @@ def render_overview_view(screening_result):
     # Row 3: Conjunction Events Ledger
     st.markdown("### Conjunction Events Ledger")
     render_interactive_results_table(full_table, key_prefix="overview_ledger")
+

@@ -2,14 +2,11 @@
 from __future__ import annotations
 
 import unittest
-from pathlib import Path
 import numpy as np
 import pandas as pd
 
 from config.settings import (
     DEFAULT_THRESHOLDS,
-    FEATURES,
-    MODEL_LABELS,
     MODEL_SMOTENC_KEY,
     MODEL_UNWEIGHTED_KEY,
     MODELS_DIR,
@@ -114,3 +111,4 @@ class RealModelIntegrationTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

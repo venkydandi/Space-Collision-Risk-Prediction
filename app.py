@@ -16,7 +16,6 @@ st.set_page_config(
 
 from components.sidebar import render_sidebar
 from components.ui_layout import inject_custom_css
-from config.settings import DEFAULT_THRESHOLDS, MODEL_LABELS, MODEL_UNWEIGHTED_KEY
 from core.model_loader import get_cached_model_bundle
 from services.screening_service import run_screening_pipeline
 from views import (
@@ -51,12 +50,19 @@ def main():
     # Render sidebar controls and retrieve user parameters
     selected_page, primary_model_key, thresholds = render_sidebar()
 
-    # Check if a sample dataset should be loaded
+    # Pre-load standard demo dataset on initial session visit if no dataset exists
+    if "raw_dataset" not in st.session_state:
+        sample_path = Path("data/sample_cdm_valid.csv")
+        if sample_path.is_file():
+            st.session_state["raw_dataset"] = pd.read_csv(sample_path)
+            st.session_state["dataset_name"] = "sample_cdm_valid.csv (Demo)"
+
+    # Check if a sample dataset should be reloaded
     if st.session_state.get("use_sample_data", False):
         sample_path = Path("data/sample_cdm_valid.csv")
         if sample_path.is_file():
             st.session_state["raw_dataset"] = pd.read_csv(sample_path)
-            st.session_state["dataset_name"] = "sample_cdm_valid.csv"
+            st.session_state["dataset_name"] = "sample_cdm_valid.csv (Demo)"
         st.session_state["use_sample_data"] = False
 
     # Function to run screening pipeline on any DataFrame
@@ -108,3 +114,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

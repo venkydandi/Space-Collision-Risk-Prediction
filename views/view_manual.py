@@ -6,9 +6,6 @@ import streamlit as st
 
 from components.ui_layout import render_header
 from config.settings import (
-    DEFAULT_THRESHOLDS,
-    FEATURES,
-    MODEL_LABELS,
     MODEL_SMOTENC_KEY,
     MODEL_UNWEIGHTED_KEY,
     OBJECT_TYPE_CATEGORIES,
@@ -137,6 +134,10 @@ def render_manual_view(models, thresholds):
             clean_features=validation.clean_features,
             thresholds=thresholds,
         )
+        st.session_state["manual_eval_data"] = eval_result
+
+    if "manual_eval_data" in st.session_state:
+        eval_result = st.session_state["manual_eval_data"]
 
         u_score = eval_result[f"{MODEL_UNWEIGHTED_KEY}_scores"][0]
         u_label = eval_result[f"{MODEL_UNWEIGHTED_KEY}_labels"][0]
@@ -148,52 +149,63 @@ def render_manual_view(models, thresholds):
 
         agreement = eval_result["agreement_labels"][0]
 
-        res_col1, res_col2 = st.columns(2)
+        display_mode = st.radio(
+            "Display Mode:",
+            ["Dual-Model Comparison", "Unweighted RF Only", "SMOTENC RF (0.25) Only"],
+            horizontal=True,
+            key="manual_display_mode_choice",
+        )
 
-        with res_col1:
-            u_color = "#DC2626" if u_label == "High risk" else "#16A34A"
-            st.markdown(
-                f"""
-                <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-top: 4px solid {u_color}; border-radius: 6px; padding: 1.25rem;">
-                    <div style="font-size: 0.8rem; font-weight: 700; color: #64748B; text-transform: uppercase;">
-                        Random Forest — Unweighted
-                    </div>
-                    <div style="font-size: 1.5rem; font-weight: 700; color: {u_color}; margin: 0.4rem 0;">
-                        {u_label}
-                    </div>
-                    <div style="font-size: 0.9rem; color: #334155; line-height: 1.6;">
-                        <strong>Score:</strong> <code>{u_score:.4f}</code><br>
-                        <strong>Threshold:</strong> <code>{u_thresh:.2f}</code><br>
-                        <strong>Status:</strong> {'Above' if u_score >= u_thresh else 'Below'} decision threshold
-                    </div>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
+        u_color = "#DC2626" if u_label == "High risk" else "#16A34A"
+        u_card_html = f"""
+        <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-top: 4px solid {u_color}; border-radius: 6px; padding: 1.25rem;">
+            <div style="font-size: 0.8rem; font-weight: 700; color: #64748B; text-transform: uppercase;">
+                Random Forest — Unweighted
+            </div>
+            <div style="font-size: 1.5rem; font-weight: 700; color: {u_color}; margin: 0.4rem 0;">
+                {u_label}
+            </div>
+            <div style="font-size: 0.9rem; color: #334155; line-height: 1.6;">
+                <strong>Score:</strong> <code>{u_score:.4f}</code><br>
+                <strong>Decision Threshold:</strong> <code>{u_thresh:.2f}</code><br>
+                <strong>Evaluation:</strong> {'Score >= Threshold (High Risk)' if u_score >= u_thresh else 'Score < Threshold (Low Risk)'}
+            </div>
+        </div>
+        """
 
-        with res_col2:
-            s_color = "#DC2626" if s_label == "High risk" else "#16A34A"
-            st.markdown(
-                f"""
-                <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-top: 4px solid {s_color}; border-radius: 6px; padding: 1.25rem;">
-                    <div style="font-size: 0.8rem; font-weight: 700; color: #64748B; text-transform: uppercase;">
-                        Random Forest + SMOTENC (0.25)
-                    </div>
-                    <div style="font-size: 1.5rem; font-weight: 700; color: {s_color}; margin: 0.4rem 0;">
-                        {s_label}
-                    </div>
-                    <div style="font-size: 0.9rem; color: #334155; line-height: 1.6;">
-                        <strong>Score:</strong> <code>{s_score:.4f}</code><br>
-                        <strong>Threshold:</strong> <code>{s_thresh:.2f}</code><br>
-                        <strong>Status:</strong> {'Above' if s_score >= s_thresh else 'Below'} decision threshold
-                    </div>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
+        s_color = "#DC2626" if s_label == "High risk" else "#16A34A"
+        s_card_html = f"""
+        <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-top: 4px solid {s_color}; border-radius: 6px; padding: 1.25rem;">
+            <div style="font-size: 0.8rem; font-weight: 700; color: #64748B; text-transform: uppercase;">
+                Random Forest + SMOTENC (0.25)
+            </div>
+            <div style="font-size: 1.5rem; font-weight: 700; color: {s_color}; margin: 0.4rem 0;">
+                {s_label}
+            </div>
+            <div style="font-size: 0.9rem; color: #334155; line-height: 1.6;">
+                <strong>Score:</strong> <code>{s_score:.4f}</code><br>
+                <strong>Decision Threshold:</strong> <code>{s_thresh:.2f}</code><br>
+                <strong>Evaluation:</strong> {'Score >= Threshold (High Risk)' if s_score >= s_thresh else 'Score < Threshold (Low Risk)'}
+            </div>
+        </div>
+        """
 
-        st.markdown("<br>", unsafe_allow_html=True)
-        if agreement == "Agreement":
-            st.success(f"Model Agreement: Both models concordantly classified this event as '{u_label}'.")
-        else:
-            st.warning("Model Disagreement Detected: Unweighted RF and SMOTENC RF produced conflicting risk classes. Operational review by flight dynamics team is recommended.")
+        if display_mode == "Dual-Model Comparison":
+            res_col1, res_col2 = st.columns(2)
+            with res_col1:
+                st.markdown(u_card_html, unsafe_allow_html=True)
+            with res_col2:
+                st.markdown(s_card_html, unsafe_allow_html=True)
+
+            st.markdown("<br>", unsafe_allow_html=True)
+            if agreement == "Agreement":
+                st.success(f"Concordant Prediction: Both models classify this event as '{u_label}'.")
+            else:
+                st.warning("Prediction Disagreement: Unweighted RF and SMOTENC RF produced conflicting risk classes. Operational review recommended.")
+
+        elif display_mode == "Unweighted RF Only":
+            st.markdown(u_card_html, unsafe_allow_html=True)
+
+        elif display_mode == "SMOTENC RF (0.25) Only":
+            st.markdown(s_card_html, unsafe_allow_html=True)
+

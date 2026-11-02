@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import unittest
-import numpy as np
 import pandas as pd
 
 from config.settings import (
@@ -91,3 +90,4 @@ class ScreeningServiceTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

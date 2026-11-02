@@ -1,7 +1,6 @@
 """Reusable UI layout components following corporate design guidelines."""
 from __future__ import annotations
 
-from pathlib import Path
 import streamlit as st
 
 from config.settings import ASSETS_DIR
@@ -59,3 +58,4 @@ def render_operational_notice():
         """,
         unsafe_allow_html=True,
     )
+

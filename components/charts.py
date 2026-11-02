@@ -83,7 +83,8 @@ def plot_score_histogram(scores: list[float], threshold: float, model_name: str)
 
 def plot_miss_distance_scatter(accepted_df: pd.DataFrame) -> go.Figure:
     """Plot Miss Distance vs Mahalanobis Distance colored by classification."""
-    if accepted_df.empty or "miss_distance" not in accepted_df.columns:
+    required_cols = ["miss_distance", "mahalanobis_distance", OUTPUT_COLS["primary_class"]]
+    if accepted_df.empty or not all(col in accepted_df.columns for col in required_cols):
         fig = go.Figure()
         fig.add_annotation(text="No accepted data for spatial analysis", showarrow=False)
         fig.update_layout(height=340)
@@ -94,13 +95,16 @@ def plot_miss_distance_scatter(accepted_df: pd.DataFrame) -> go.Figure:
         "Low risk": "#16A34A",
     }
 
+    hover_candidates = [OUTPUT_COLS["event_id"], "time_to_tca", OUTPUT_COLS["primary_score"]]
+    hover_cols = [c for c in hover_candidates if c in accepted_df.columns]
+
     fig = px.scatter(
         accepted_df,
         x="miss_distance",
         y="mahalanobis_distance",
         color=OUTPUT_COLS["primary_class"],
         color_discrete_map=color_map,
-        hover_data=[OUTPUT_COLS["event_id"], "time_to_tca", OUTPUT_COLS["primary_score"]],
+        hover_data=hover_cols if hover_cols else None,
         labels={
             "miss_distance": "Miss Distance (m)",
             "mahalanobis_distance": "Mahalanobis Distance",
@@ -147,7 +151,8 @@ def plot_model_comparison_bar(summary) -> go.Figure:
 
 def plot_object_type_distribution(accepted_df: pd.DataFrame) -> go.Figure:
     """Plot risk counts partitioned by chaser object type."""
-    if accepted_df.empty or "c_object_type" not in accepted_df.columns:
+    required_cols = ["c_object_type", OUTPUT_COLS["primary_class"]]
+    if accepted_df.empty or not all(col in accepted_df.columns for col in required_cols):
         fig = go.Figure()
         fig.add_annotation(text="No data available for object type distribution", showarrow=False)
         fig.update_layout(height=300)
@@ -188,3 +193,4 @@ def plot_object_type_distribution(accepted_df: pd.DataFrame) -> go.Figure:
         plot_bgcolor="rgba(0,0,0,0)",
     )
     return fig
+

@@ -74,3 +74,4 @@ def render_interactive_results_table(results_df: pd.DataFrame, key_prefix: str =
         use_container_width=True,
         hide_index=True,
     )
+

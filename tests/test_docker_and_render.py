@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import unittest
-from pathlib import Path
 import yaml
 
 from config.settings import MODELS_DIR, PROJECT_ROOT
@@ -62,3 +61,4 @@ class DockerAndRenderConfigTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
