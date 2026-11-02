@@ -6,6 +6,16 @@ import json
 import logging
 from pathlib import Path
 from typing import Any, Dict, Tuple
+import warnings
+
+# Suppress cross-version pickle warnings and numpy shape deprecation noise
+warnings.filterwarnings("ignore", category=UserWarning, module="sklearn")
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+try:
+    from sklearn.exceptions import InconsistentVersionWarning
+    warnings.filterwarnings("ignore", category=InconsistentVersionWarning)
+except ImportError:
+    pass
 
 # Step 1: Ensure scikit-learn cross-version unpickling compatibility.
 # In scikit-learn >= 1.7, the internal helper _RemainderColsList was refactored.

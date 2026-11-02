@@ -1,8 +1,9 @@
 FROM python:3.11-slim
 
-# Prevent Python from writing .pyc files and enable unbuffered output
+# Prevent Python from writing .pyc files, enable unbuffered output, and suppress unpickle warning noise
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONWARNINGS="ignore" \
     PORT=8501 \
     STREAMLIT_SERVER_HEADLESS=true \
     STREAMLIT_SERVER_ENABLE_CORS=false \

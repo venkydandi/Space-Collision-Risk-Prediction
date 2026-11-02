@@ -2,8 +2,11 @@
 from __future__ import annotations
 
 import unittest
+import warnings
 import numpy as np
 import pandas as pd
+
+warnings.filterwarnings("ignore")
 
 from config.settings import (
     DEFAULT_THRESHOLDS,

@@ -3,8 +3,12 @@ from __future__ import annotations
 
 import logging
 from pathlib import Path
+import warnings
 import pandas as pd
 import streamlit as st
+
+# Suppress benign library warning noise
+warnings.filterwarnings("ignore")
 
 # Configure page layout and metadata
 st.set_page_config(

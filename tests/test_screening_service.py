@@ -2,7 +2,10 @@
 from __future__ import annotations
 
 import unittest
+import warnings
 import pandas as pd
+
+warnings.filterwarnings("ignore")
 
 from config.settings import (
     DEFAULT_THRESHOLDS,
