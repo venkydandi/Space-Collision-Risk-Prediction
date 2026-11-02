@@ -25,6 +25,7 @@ from core.prediction_engine import (
 class RealModelIntegrationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        warnings.filterwarnings("ignore")
         cls.models, cls.metadata = load_model_bundle(MODELS_DIR)
 
     def test_both_models_loaded(self):

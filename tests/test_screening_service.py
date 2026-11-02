@@ -21,6 +21,7 @@ from services.screening_service import run_screening_pipeline
 class ScreeningServiceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        warnings.filterwarnings("ignore")
         cls.models, cls.metadata = load_model_bundle(MODELS_DIR)
 
     def setUp(self):
