@@ -32,6 +32,10 @@ def render_reports_view(screening_result):
 
     st.markdown("---")
 
+    # Pre-generate both reports before rendering columns (avoids scoping issues)
+    csv_bytes = generate_results_csv(full_table)
+    exec_text = generate_executive_summary_text(summary)
+
     col_csv, col_txt = st.columns([1, 1])
 
     with col_csv:
@@ -48,7 +52,6 @@ def render_reports_view(screening_result):
             - All original input columns (unaltered)
             """
         )
-        csv_bytes = generate_results_csv(full_table)
         st.download_button(
             label="Download Complete Screening Results (CSV)",
             data=csv_bytes,
@@ -62,11 +65,10 @@ def render_reports_view(screening_result):
         st.markdown("#### Executive Summary Text Report")
         st.markdown(
             """
-            Summary file suitable for operational flight logbooks, mission handover, 
+            Summary file suitable for operational flight logbooks, mission handover,
             or space situational awareness shift reports.
             """
         )
-        exec_text = generate_executive_summary_text(summary)
         st.download_button(
             label="Download Executive Summary Report (TXT)",
             data=exec_text.encode("utf-8"),
@@ -83,4 +85,3 @@ def render_reports_view(screening_result):
     st.markdown("### Complete Audit Table Preview")
     st.caption("Verifying 100% row order preservation and error transparency.")
     st.dataframe(full_table, use_container_width=True, hide_index=True)
-

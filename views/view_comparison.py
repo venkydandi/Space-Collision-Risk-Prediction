@@ -47,10 +47,11 @@ def render_comparison_view(screening_result):
     summary = screening_result.summary
     full_table = screening_result.full_table
 
+    n_accepted = summary.accepted_records or 1  # guard against zero division in KPI percentages
     c1, c2, c3, c4 = st.columns(4)
-    render_kpi_card("Unweighted RF Flagged", f"{summary.unweighted_high_risk:,}", f"Threshold {summary.unweighted_high_risk / summary.accepted_records:.1%}", c1)
-    render_kpi_card("SMOTENC RF Flagged", f"{summary.smotenc_high_risk:,}", f"Threshold {summary.smotenc_high_risk / summary.accepted_records:.1%}", c2)
-    render_kpi_card("Concordant Agreements", f"{summary.agreement_count:,}", f"Both models match ({summary.agreement_count / summary.accepted_records:.1%})", c3)
+    render_kpi_card("Unweighted RF Flagged", f"{summary.unweighted_high_risk:,}", f"{summary.unweighted_high_risk / n_accepted:.1%} of screened", c1)
+    render_kpi_card("SMOTENC RF Flagged", f"{summary.smotenc_high_risk:,}", f"{summary.smotenc_high_risk / n_accepted:.1%} of screened", c2)
+    render_kpi_card("Concordant Agreements", f"{summary.agreement_count:,}", f"Both models match ({summary.agreement_count / n_accepted:.1%})", c3)
     render_kpi_card("Model Disagreements", f"{summary.disagreement_count:,}", f"Actionable review cases ({summary.disagreement_rate:.1%})", c4)
 
     st.markdown("---")

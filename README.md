@@ -5,7 +5,7 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.40%2B-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io)
 [![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)](https://www.python.org)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-1.6.1-F7931E?logo=scikit-learn&logoColor=white)](https://scikit-learn.org)
-[![Tests](https://img.shields.io/badge/Tests-24%20passed-brightgreen?logo=pytest&logoColor=white)](./tests)
+[![Tests](https://img.shields.io/badge/Tests-26%20passed-brightgreen?logo=pytest&logoColor=white)](./tests)
 
 ---
 
@@ -296,7 +296,7 @@ The repository includes `render.yaml`. Render will detect it automatically.
 
 ## 11. Testing
 
-The test suite contains **24 automated tests** across 5 modules.
+The test suite contains **26 automated tests** across 5 modules.
 
 ```bash
 # Run all tests with pytest
@@ -309,13 +309,13 @@ python -m unittest discover tests -v
 **Expected output (summary):**
 
 ```
-tests/test_docker_and_render.py .....                      [  5 passed ]
+tests/test_docker_and_render.py .......                    [  7 passed ]
 tests/test_export_service.py .....                         [  5 passed ]
 tests/test_model_integration.py .....                      [  5 passed ]
 tests/test_screening_service.py .....                      [  5 passed ]
 tests/test_validation_engine.py .....                      [  4 passed ]
 
-======================== 24 passed in ~Xs =========================
+======================== 26 passed in ~Xs =========================
 ```
 
 | Test Module | Coverage |

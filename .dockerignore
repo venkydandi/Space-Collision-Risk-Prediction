@@ -11,6 +11,6 @@ htmlcov/
 .venv
 venv/
 ENV/
-*.md
 tests/
-
+# NOTE: models/ and models/*.joblib are intentionally included (NOT excluded).
+# Do not add models/ to this file.
